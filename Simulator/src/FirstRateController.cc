@@ -79,7 +79,6 @@ namespace ns3{
 
 				for (std::map<Ipv4Address, uint64_t>::iterator it = mapNewRates.begin(); it != mapNewRates.end(); ++it)
 				{
-					it->second = it->second;
 					if((m_userDB.getMapUsers().find(it->first)->second)!=eUserTarifSilver)
 						it->second = Min(ra + it->second,rate[m_userRD.getTarif(it->first)]);
 				}
@@ -93,7 +92,6 @@ namespace ns3{
 			{
 				for (std::map<Ipv4Address, uint64_t>::iterator it = mapNewRates.begin(); it != mapNewRates.end(); ++it)
 				{
-					it->second = it->second;
 					if((m_userDB.getMapUsers().find(it->first)->second)==eUserTarifGold)
 						it->second = Min(ra + it->second,rate[m_userRD.getTarif(it->first)]);
 				}
