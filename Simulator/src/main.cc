@@ -8,7 +8,7 @@
 #include "UsuallyChannel.h"
 
 int main(int argv,char** args){
-	UsuallyChannel channel = UsuallyChannel(50 * RATE_GRANULARITY * 5);
+	UsuallyChannel channel(50 * RATE_GRANULARITY * 5);
 	double FinishTime = 0.6;
 	double Step = 0.01;
 	int Clients = 5;
