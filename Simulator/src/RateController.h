@@ -20,20 +20,21 @@ namespace ns3 {
 
         virtual ~RateController();
 
+
+
+        virtual void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewRates, uint64_t curEnodebSpeed) = 0;
+
         void setMaxEnodebSpeed(uint64_t value) {
-            m_maxEnodebSpeed = value;
+             m_maxEnodebSpeed = value;
         }
 
         void setRateDB(ns3::RateDatabase *user) {
             m_userRD = (*user);
         }
 
-         uint64_t getMaxEnodebSpeed() {
+        uint64_t getMaxEnodebSpeed() {
             return m_maxEnodebSpeed;
         }
-
-        virtual void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewRates, uint64_t curEnodebSpeed) = 0;
-        
         
         void setRates(uint64_t minBitrate, uint64_t midBitrate, uint64_t maxBitrate) {
             m_minBitrate = minBitrate;

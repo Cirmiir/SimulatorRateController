@@ -127,9 +127,9 @@ FlushStreams (void)
    * streams even if one of the stream pointers is bad.
    * The SIGSEGV override should only be active for the
    * duration of this function. */
-  struct sigaction hdl;
-  hdl.sa_handler=sigHandler;
-  sigaction (SIGSEGV, &hdl, 0);
+  //struct sigaction hdl;
+  //hdl.sa_handler=sigHandler;
+ // sigaction (SIGSEGV, &hdl, 0);
 
   std::list<std::ostream*> *l = *pl;
 
@@ -142,8 +142,8 @@ FlushStreams (void)
     }
 
   /* Restore default SIGSEGV handler (Not that it matters anyway) */
-  hdl.sa_handler=SIG_DFL;
-  sigaction (SIGSEGV, &hdl, 0);
+  //hdl.sa_handler=SIG_DFL;
+ // sigaction (SIGSEGV, &hdl, 0);
 
   /* Flush all opened FILE* */
   std::fflush (0);

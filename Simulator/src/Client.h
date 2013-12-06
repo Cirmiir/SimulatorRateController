@@ -11,7 +11,6 @@ public:
 	~Client();
 	void setBitrate(uint64_t bitrate)
 	{
-		//std::cout <<"client"<< m_bitRate <<"\n";
 		m_bitRate = bitrate;
 	};
 	void setMaxBitrate(uint64_t bitrate)
@@ -32,14 +31,10 @@ public:
 	};
 	uint64_t getBitrate()
 	{
-		//std::cout <<"client get"<< m_bitRate / RATE_GRANULARITY<<"\n";
-		//if (m_maxbitRate == 0)
 			return m_bitRate;
 	};
 	double getCondition()
 	{
-		//std::cout <<"client get"<< m_bitRate / RATE_GRANULARITY<<"\n";
-		//if (m_maxbitRate == 0)
 			return m_condition;
 	};
 	ns3::Ipv4Address getAddress()

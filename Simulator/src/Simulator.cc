@@ -98,7 +98,7 @@ void Simulator::Step(){
 			}*/
 
 	std::map<ns3::Ipv4Address, uint64_t>* map = m_channel.getSpeeds();
-	if (m_time - prevTime>stepTime)
+	if (m_time - prevTime > stepTime)
 	{
 		rate->doLoadBalancing(*map, 5*RATE_GRANULARITY);
 		for (std::map<ns3::Ipv4Address, uint64_t>::iterator it=map->begin(); it!=map->end(); ++it)
@@ -110,7 +110,6 @@ void Simulator::Step(){
 	for (std::map<ns3::Ipv4Address, uint64_t>::iterator it=map->begin(); it!=map->end(); ++it)
 			mapFrequency.insert(std::pair<ns3::Ipv4Address, uint64_t>(it->first,it->second/m_clients->find(it->first)-> second.getCondition()));
 
-	//frequency->doLoadBalancing(mapFrequency);
 	
 	std::cout << "In time " << m_time<<"s  ================\n";
 	for (std::map<ns3::Ipv4Address, Client>::iterator it=m_clients->begin(); it!=m_clients->end(); ++it)

@@ -5,9 +5,10 @@
 #include "Client.h"
 #include "Rate.h"
 #include <cstring>
+#include "UsuallyChannel.h"
 
 int main(int argv,char** args){
-	Channel channel = Channel(50 * RATE_GRANULARITY * 5);
+	UsuallyChannel channel = UsuallyChannel(50 * RATE_GRANULARITY * 5);
 	double FinishTime = 0.6;
 	double Step = 0.01;
 	int Clients = 5;

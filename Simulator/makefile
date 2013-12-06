@@ -3,8 +3,8 @@ SOURCEDIR:= src
 NS3DIR	 := ns3
 DEBUG	 := -g
 all: main
-main: $(BUILDDIR)/main.o $(BUILDDIR)/Client.o $(BUILDDIR)/Channel.o ns3 $(BUILDDIR)/Simulator.o $(BUILDDIR)/RateController.o $(BUILDDIR)/UserDatabase.o $(BUILDDIR)/RateDatabase.o $(BUILDDIR)/FrequencyController.o $(BUILDDIR)/FirstRateController.o $(BUILDDIR)/SecondRateController.o $(BUILDDIR)/ThirdRateController.o
-	g++ $(DEBUG) -o  Simulator.out $(BUILDDIR)/Client.o $(BUILDDIR)/main.o $(BUILDDIR)/ipv4-address.o $(BUILDDIR)/address.o $(BUILDDIR)/attribute.o $(BUILDDIR)/log.o $(BUILDDIR)/tag-buffer.o $(BUILDDIR)/string.o $(BUILDDIR)/Channel.o $(BUILDDIR)/Simulator.o $(BUILDDIR)/RateController.o $(BUILDDIR)/UserDatabase.o $(BUILDDIR)/RateDatabase.o $(BUILDDIR)/FrequencyController.o $(BUILDDIR)/FirstRateController.o $(BUILDDIR)/SecondRateController.o $(BUILDDIR)/ThirdRateController.o
+main: $(BUILDDIR)/main.o $(BUILDDIR)/Client.o $(BUILDDIR)/Channel.o ns3 $(BUILDDIR)/Simulator.o $(BUILDDIR)/RateController.o $(BUILDDIR)/UserDatabase.o $(BUILDDIR)/RateDatabase.o $(BUILDDIR)/FrequencyController.o $(BUILDDIR)/FirstRateController.o $(BUILDDIR)/SecondRateController.o $(BUILDDIR)/ThirdRateController.o $(BUILDDIR)/UsuallyChannel.o
+	g++ $(DEBUG) -o  Simulator.out $(BUILDDIR)/Client.o $(BUILDDIR)/main.o $(BUILDDIR)/ipv4-address.o $(BUILDDIR)/address.o $(BUILDDIR)/attribute.o $(BUILDDIR)/log.o $(BUILDDIR)/tag-buffer.o $(BUILDDIR)/string.o $(BUILDDIR)/Channel.o $(BUILDDIR)/Simulator.o $(BUILDDIR)/RateController.o $(BUILDDIR)/UserDatabase.o $(BUILDDIR)/RateDatabase.o $(BUILDDIR)/FrequencyController.o $(BUILDDIR)/FirstRateController.o $(BUILDDIR)/SecondRateController.o $(BUILDDIR)/ThirdRateController.o $(BUILDDIR)/UsuallyChannel.o
 $(BUILDDIR)/main.o:	$(SOURCEDIR)/main.cc $(SOURCEDIR)/Client.h $(SOURCEDIR)/Rate.h
 	g++ $(DEBUG) -c -o  $(BUILDDIR)/main.o $(SOURCEDIR)/main.cc
 $(BUILDDIR)/FirstRateController.o: $(SOURCEDIR)/RateController.h $(SOURCEDIR)/FirstRateController.h $(SOURCEDIR)/FirstRateController.cc
@@ -19,6 +19,8 @@ $(BUILDDIR)/FrequencyController.o: $(SOURCEDIR)/FrequencyController.h $(SOURCEDI
 	g++ $(DEBUG) -c -o  $(BUILDDIR)/FrequencyController.o $(SOURCEDIR)/FrequencyController.cc
 $(BUILDDIR)/Simulator.o: $(SOURCEDIR)/Simulator.h $(SOURCEDIR)/Simulator.cc
 	g++ $(DEBUG) -c -o  $(BUILDDIR)/Simulator.o $(SOURCEDIR)/Simulator.cc
+$(BUILDDIR)/UsuallyChannel.o: $(SOURCEDIR)/UsuallyChannel.h $(SOURCEDIR)/UsuallyChannel.cc $(SOURCEDIR)/Channel.h 
+	g++ $(DEBUG) -c -o $(BUILDDIR)/UsuallyChannel.o $(SOURCEDIR)/UsuallyChannel.cc
 $(BUILDDIR)/Channel.o: $(SOURCEDIR)/Channel.h $(SOURCEDIR)/Channel.cc
 	g++ $(DEBUG) -c -o $(BUILDDIR)/Channel.o $(SOURCEDIR)/Channel.cc
 $(BUILDDIR)/Client.o: $(SOURCEDIR)/Client.h $(SOURCEDIR)/Client.cc $(SOURCEDIR)/$(NS3DIR)/ipv4-address.h
