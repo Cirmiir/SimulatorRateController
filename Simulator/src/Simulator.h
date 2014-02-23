@@ -1,9 +1,9 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-#include "RateController.h"
-#include "FirstRateController.h"
-#include "SecondRateController.h"
-#include "ThirdRateController.h"
+#include "RateControllers/RateController.h"
+#include "RateControllers/FirstRateController.h"
+#include "RateControllers/SecondRateController.h"
+#include "RateControllers/ThirdRateController.h"
 #include "RateDatabase.h"
 #include "math.h"
 #include "Client.h"

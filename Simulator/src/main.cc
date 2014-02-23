@@ -5,10 +5,20 @@
 #include "Client.h"
 #include "Rate.h"
 #include <cstring>
-#include "UsuallyChannel.h"
+#include "Channels/UsuallyChannel.h"
+#include "ChannelFactory.h"
 
 int main(int argv,char** args){
-	UsuallyChannel channel(50 * RATE_GRANULARITY * 5);
+	ChannelFactory* CF= new ChannelFactory();
+	std::string str = "GreedChannel";
+	Channel* channel = CF->CreateChannel(str,50 * RATE_GRANULARITY * 5);
+	if (channel == 0)
+		std::cout << "not work";
+	else
+		std::cout << channel->getEnbodedSpeed();
+
+	//Channel* channel = CF.CreateChannel("UsuallyChannel");
+	/*UsuallyChannel channel(50 * RATE_GRANULARITY * 5);*/
 	double FinishTime = 0.6;
 	double Step = 0.01;
 	int Clients = 5;
@@ -50,7 +60,7 @@ int main(int argv,char** args){
 		
 
 	}
-	Simulator sim = Simulator(Clients,channel,0.01,file);
+	Simulator sim = Simulator(Clients, *channel,0.01,file);
 	sim.setClients(client);
 	
 	sim.Run(FinishTime);

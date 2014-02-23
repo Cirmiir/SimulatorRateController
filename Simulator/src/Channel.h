@@ -17,7 +17,6 @@ public:
 	virtual void transmit(ns3::Ipv4Address address, uint64_t speed) = 0;
 	virtual int64_t transmits(double time,uint64_t add) = 0 ;
 	virtual uint64_t EndTransmit() = 0;
-	virtual Channel* Create(uint64_t maxEnbodedSpeed) = 0;
 
 
 	void setEnbodedSpeed(uint64_t maxEnbodedSpeed)

@@ -4,10 +4,10 @@
 
 
 
-#include "ns3/ipv4-address.h"
+#include "../ns3/ipv4-address.h"
 #include <map>
-#include "ns3/UserDatabase.h"
-#include "RateDatabase.h"
+#include "../ns3/UserDatabase.h"
+#include "../RateDatabase.h"
 
 namespace ns3 {
 

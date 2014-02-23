@@ -83,13 +83,11 @@ void Simulator::Step(){
 	m_channel.transmits(0.1, 0);
 	m_time += 0.01;*/
 	int64_t drop = m_channel.transmits(m_time,0);
-	/*if (drop!=-1)
-		//while(MapSum() > m_channel.getEnbodedSpeed())
+	/*if (drop!=0)
+		while(MapSum() > m_channel.getEnbodedSpeed())
 			for (std::map<ns3::Ipv4Address, Client>::iterator it=m_clients->begin(); it!=m_clients->end(); ++it)
 			{
-
 				uint64_t cur_Bitrate = it->second.getBitrate();
-				std::cout<< cur_Bitrate <<" " << drop <<"\n";
 				if (cur_Bitrate > drop)
 				{
 					it->second.setBitrate(drop);
@@ -116,7 +114,7 @@ void Simulator::Step(){
 		{
 			std::cout << "Bitrate for client "<<it->first<<"  "<< it->second.getNameTarif()<<"  " << it->second.getNameQuality()<<" "<< it->second.getBitrate()/RATE_GRANULARITY <<"Kb " << "\n";
 		} 
-	m_channel.EndTransmit();
+	drop = m_channel.EndTransmit();
 	uint64_t sum=0;
 	*files <<m_time<<"  ";
 	for (std::map<ns3::Ipv4Address, Client>::iterator it=m_clients->begin(); it!=m_clients->end(); ++it)

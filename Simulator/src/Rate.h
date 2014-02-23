@@ -2,7 +2,7 @@
 #ifndef RATE_H
 #define	RATE_H
 
-#include "RateController.h"
+#include "RateControllers/RateController.h"
 
 #define RATE_GRANULARITY ns3::RateController::RATE_GRANULARITY
 #endif	/* RATECONTROLLER_H */

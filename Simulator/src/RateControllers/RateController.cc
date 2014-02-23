@@ -1,7 +1,7 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
 #include "RateController.h"
-#include "Rate.h"
+#include "../Rate.h"
 
 namespace ns3 {
 	RateController::RateController(UserDatabase &userDB,RateDatabase &userRD):m_userDB(userDB),m_userRD(userRD)
