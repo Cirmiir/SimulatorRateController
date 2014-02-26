@@ -13,9 +13,7 @@ namespace ns3 {
         
     public:
         
-        FrequencyController(){};
-
-        virtual ~FrequencyController(){};
+    	FrequencyController(){};
 
         void setMaxFrequency(uint64_t value) {
             m_maxFrequency = value;
