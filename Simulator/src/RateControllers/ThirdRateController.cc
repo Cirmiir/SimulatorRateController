@@ -130,4 +130,6 @@ namespace ns3{
 
 			m_previsionEnodebSpeed = getMapSum(mapNewRates);
 		};
+
+
 }

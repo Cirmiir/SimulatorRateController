@@ -8,7 +8,7 @@
 #ifndef USUALLYCHANNEL_H_
 #define USUALLYCHANNEL_H_
 
-#include "../Channel.h"
+#include "Channel.h"
 
 class UsuallyChannel : public  Channel {
 public:

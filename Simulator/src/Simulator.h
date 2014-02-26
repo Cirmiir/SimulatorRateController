@@ -7,47 +7,40 @@
 #include "RateDatabase.h"
 #include "math.h"
 #include "Client.h"
-#include "Channel.h"
+#include "Channels/Channel.h"
 #include "SinStream.h"
 #include <list>
 #include <map>
 #include <iostream>
 #include <fstream>
-#include "FrequencyController.h"
+#include "FrequencyControllerFactory.h"
+#include "FrequencyControllers/FrequencyController.h"
+
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
+typedef std::map<ns3::Ipv4Address, Client> ClientList;
+typedef std::pair<ns3::Ipv4Address,Client> NodeList;
 
 class Simulator
 {
 public:
 
-	Simulator(uint32_t client, Channel &chan,double step,std::string file);
+	Simulator(uint32_t client, Channel &chan,double step,std::string file,const char* frequencyController);
 	~Simulator();
 	uint64_t MapSum();
 	void Step();
 	void Run(double finish);
 	void AddClient(Client client);
-	void setClients(std::map<ns3::Ipv4Address, Client> &clients);
-	//std::ostringstream GetNextIpv4Address()
-	//{
-	//	std::ostringstream subnet;
-	//	subnet<<m_A<<"."<<m_B<<"."<<m_C<<"."<<m_D;
-	//	return subnet;
-	//};
+	void setClients(ClientList &clients,const char* RateController);
 
 private:
-	std::ofstream *files;
+	std::ofstream *m_files;
 	double stepTime;
 	double m_time;
-	double prevTime;
+	double m_prevTime;
 	Channel &m_channel;
-	ns3::RateController *rate;
-	ns3::FrequencyController *frequency;
-	std::map<ns3::Ipv4Address, Client> *m_clients;
-
-	int m_A;
-	int m_B;
-	int m_C;
-	int m_D;
+	ns3::RateController *m_rate;
+	ns3::FrequencyController *m_frequency;
+	ClientList *m_clients;
 };
 #endif

@@ -4,7 +4,7 @@
 
 
 
-#include "ns3/ipv4-address.h"
+#include "../ns3/ipv4-address.h"
 #include <map>
 
 namespace ns3 {
@@ -13,20 +13,21 @@ namespace ns3 {
         
     public:
         
-        FrequencyController();
+        FrequencyController(){};
 
-        virtual ~FrequencyController();
+        virtual ~FrequencyController(){};
 
         void setMaxFrequency(uint64_t value) {
             m_maxFrequency = value;
         }
-         uint64_t getMaxFrequency() {
+
+        uint64_t getMaxFrequency() {
             return m_maxFrequency;
         }
 
-        void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewFrequency);      
+        virtual void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewFrequency)=0;
 
-    private:
+    protected:
         uint64_t m_maxFrequency;
         uint64_t getMapSum(std::map<Ipv4Address, uint64_t> &mapNewFrequency);
 

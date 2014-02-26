@@ -8,6 +8,7 @@
 
 #include "ns3/ipv4-address.h"
 #include <map>
+#include <string.h>
 
 #ifndef RATEDATABASE_H
 #define	RATEDATABASE_H
@@ -48,6 +49,18 @@ namespace ns3 {
             static const char *names[] = {"480p", "720p", "1080p"};
 
             return names[userTarif];
+        }
+        static UserQuality getTarifForName(const char* userTarif) {
+            static const char *names[] = {"480p", "720p", "1080p"};
+            static const UserQuality Tarif[] = {e480p, e720p, e1080p};
+
+            for(int i = 0; i < 3; i++)
+            {
+            	if (strcmp(userTarif, names[i]) == 0)
+            		return Tarif[i];
+            }
+
+            return e480p;
         }
 
         int getTarif(Ipv4Address addr) {

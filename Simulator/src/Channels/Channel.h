@@ -3,7 +3,7 @@
 #define CHANNEL_H
 #include "math.h"
 #include <map>
-#include "ns3/ipv4-address.h"
+#include "../ns3/ipv4-address.h"
 
 
 class Channel

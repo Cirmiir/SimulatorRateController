@@ -1,12 +1,12 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
-#ifndef SECONDRATECONTROLLER_H
+#ifndef SECONDATECONTROLLER_H
 #define	SECONDATECONTROLLER_H
 
 #include "RateController.h"
 
 namespace ns3 {
 
-    class SecondRateController : public RateController {
+    class SecondRateController : public RateController{
         
     public:
         SecondRateController(UserDatabase &userDB,RateDatabase &userRD) 
@@ -15,6 +15,10 @@ namespace ns3 {
         } 
         ~SecondRateController(){};
         void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewRates, uint64_t curEnodebSpeed);
+        static RateController* Create(UserDatabase &userDB,RateDatabase &userRD)
+        {
+			return new SecondRateController(userDB,userRD);
+		};
         
 
     private:

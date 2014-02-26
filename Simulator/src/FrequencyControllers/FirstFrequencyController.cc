@@ -1,28 +1,29 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-#include "FrequencyController.h"
+#include "FirstFrequencyController.h"
 
 namespace ns3 {
 
-	FrequencyController::FrequencyController()
+	FirstFrequencyController::FirstFrequencyController()
 	{
 
 	}
 
-	FrequencyController::~FrequencyController(){}
+	FirstFrequencyController::~FirstFrequencyController(){}
 
 	
 
-	void FrequencyController::doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewFrequency)
+	void FirstFrequencyController::doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewFrequency)
 	{
 		uint64_t add;
 		if (mapNewFrequency.size() == 0)
 			return;
+
 		while(getMapSum(mapNewFrequency) <= m_maxFrequency)
 		{
 
 			uint64_t dif = m_maxFrequency - getMapSum(mapNewFrequency);
-			add = dif/mapNewFrequency.size();
+			add = dif / mapNewFrequency.size();
 			for (std::map<Ipv4Address, uint64_t>::iterator it=mapNewFrequency.begin(); it!=mapNewFrequency.end(); ++it)
 			{
 				it->second += add + 1;
@@ -36,19 +37,9 @@ namespace ns3 {
 			}
 		}
 
-	};
+	}
 
-	uint64_t FrequencyController::getMapSum(std::map<Ipv4Address, uint64_t> &mapNewFrequency)
-	{
-		uint64_t sum = 0;
 
-		for (std::map<Ipv4Address, uint64_t>::iterator it=mapNewFrequency.begin(); it!=mapNewFrequency.end(); ++it)
-		{
-			sum += it->second;
-		}
-
-		return sum;
-	};
 };
 
 

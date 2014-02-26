@@ -27,6 +27,9 @@ namespace ns3 {
             return this;
         };
         void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewRates, uint64_t curEnodebSpeed);
+        static RateController* Create(UserDatabase &userDB,RateDatabase &userRD){
+    		return new FirstRateController(userDB,userRD);
+    	};
         
 
     private:

@@ -7,7 +7,7 @@
 
 #ifndef CHANNELFACTORY_H_
 #define CHANNELFACTORY_H_
-#include "Channel.h"
+#include "Channels/Channel.h"
 #include "Channels/UsuallyChannel.h"
 #include "Channels/GreedChannel.h"
 #include <map>
@@ -15,7 +15,7 @@
 class ChannelFactory {
 public:
 	ChannelFactory();
-	Channel* CreateChannel(std::string channeltype,uint64_t maxEnbodedSpeed);
+	Channel* CreateChannel(const char* channeltype,uint64_t maxEnbodedSpeed);
 	~ChannelFactory();
 
 private:

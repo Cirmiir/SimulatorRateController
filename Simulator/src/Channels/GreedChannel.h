@@ -8,7 +8,7 @@
 #ifndef GREEDCHANNEL_H_
 #define GREEDCHANNEL_H_
 
-#include "../Channel.h"
+#include "Channel.h"
 
 class GreedChannel: public Channel {
 public:

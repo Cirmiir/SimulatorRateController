@@ -7,6 +7,7 @@
 
 
 #include "ipv4-address.h"
+#include <string.h>
 #include <map>
 
 #ifndef USERDATABASE_H
@@ -48,6 +49,18 @@ namespace ns3 {
             static const char *names[] = {"Gold", "Silver", "Bronze"};
 
             return names[userTarif];
+        }
+        static UserTarif getTarifForName(const char* userTarif) {
+            static const char *names[] = {"Gold", "Silver", "Bronze"};
+            static const UserTarif Tarif[] = {eUserTarifGold, eUserTarifSilver, eUserTarifBronze};
+
+            for(int i = 0; i < 3; i++)
+            {
+                   if (strcmp(userTarif, names[i]) == 0)
+                         return Tarif[i];
+            }
+
+            return eUserTarifBronze;
         }
 
         std::string getTarifForUser(Ipv4Address address) {

@@ -19,7 +19,7 @@ ChannelFactory::~ChannelFactory() {
 	// TODO Auto-generated destructor stub
 }
 
-Channel* ChannelFactory::CreateChannel(std::string channeltype,uint64_t maxEnbodedSpeed)
+Channel* ChannelFactory::CreateChannel(const char* channeltype,uint64_t maxEnbodedSpeed)
 {
 	std::cout << ChannelFactory::map.size();
 	if((map.find(channeltype)) == (map.end()))

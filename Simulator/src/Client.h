@@ -8,7 +8,10 @@ class Client
 {
 public:
 	Client(uint64_t bitRate,ns3::Ipv4Address addres,ns3::UserTarif tarif,ns3::UserQuality quality);
+	Client(uint64_t bitRate,ns3::Ipv4Address addres,const char* tarif,const char* quality);
+	Client(uint64_t bitRate,const char* addres,const char* tarif,const char* quality);
 	~Client();
+	void printInfo();
 	void setBitrate(uint64_t bitrate)
 	{
 		m_bitRate = bitrate;

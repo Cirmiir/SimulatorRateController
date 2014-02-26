@@ -11,11 +11,14 @@ namespace ns3 {
     public:
         ThirdRateController(UserDatabase &userDB,RateDatabase &userRD) 
         :RateController(userDB, m_userRD)
-        {
-        } 
+        { }
         ~ThirdRateController(){};
         
         void doLoadBalancing(std::map<Ipv4Address, uint64_t> &mapNewRates, uint64_t curEnodebSpeed);
+        static RateController* Create(UserDatabase &userDB,RateDatabase &userRD)
+        {
+        	return new ThirdRateController(userDB,userRD);
+        };
         
 
     private:
