@@ -12,7 +12,6 @@ namespace ns3{
 			{
 				setMaxEnodebSpeed(getMapSum(mapNewRates));
 			}
-			//m_maxEnodebSpeed = getMapSum(mapNewRates);
 			uint64_t ra = ceilRate(m_maxEnodebSpeed / mapNewRates.size());
 			int bronze=0, silver=0, gold=0;
 			for (std::map<Ipv4Address, uint64_t>::iterator it = mapNewRates.begin(); it != mapNewRates.end(); ++it)
@@ -57,7 +56,7 @@ namespace ns3{
 						break;
 					}		
 			}
-			uint64_t sum = int64_t (m_maxEnodebSpeed) - int64_t(getMapSum(mapNewRates));
+			uint64_t sum = (m_maxEnodebSpeed) > (getMapSum(mapNewRates)) ? (int64_t)(m_maxEnodebSpeed) - (int64_t) (getMapSum(mapNewRates)):0;
 
 			ra = ceilRate(sum / (gold + silver + bronze)); 
 			if (ra >= 1)

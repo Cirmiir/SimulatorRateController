@@ -59,10 +59,21 @@ public:
 	std::string getNameTarif()
 	{
 		return ns3::UserDatabase::getNameForTarif(m_tarif);
-	};
+	}
+	uint64_t getRb() const {
+		return m_RB;
+	}
+
+	void setRb(uint64_t rb) {
+		m_RB = rb;
+	}
+
+	;
 
 private:
+
 	ns3::Ipv4Address address;
+	uint64_t m_RB;
 	uint64_t m_bitRate;
 	uint64_t m_maxbitRate;
 	double m_condition;

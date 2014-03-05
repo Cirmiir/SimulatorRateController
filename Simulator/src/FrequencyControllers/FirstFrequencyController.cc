@@ -31,10 +31,20 @@ namespace ns3 {
 		}
 		while(m_maxFrequency < getMapSum(mapNewFrequency))
 		{
+
+			uint64_t dif = (getMapSum(mapNewFrequency) - m_maxFrequency);
+			uint64_t less = ((dif > mapNewFrequency.size()) ? dif : mapNewFrequency.size() )/ mapNewFrequency.size();
 			for (std::map<Ipv4Address, uint64_t>::iterator it=mapNewFrequency.begin(); it!=mapNewFrequency.end(); ++it)
 			{
-				it->second -= 1;
+				if(it->second == 0)
+					continue;
+
+				if(it->second > less)
+					it->second -= less;
+				else
+					it->second -= 1;
 			}
+
 		}
 
 	}

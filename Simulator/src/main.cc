@@ -7,8 +7,7 @@
 #include <cstring>
 #include "ChannelFactory.h"
 int main(int argv,char** args){
-	Channel* channel = ChannelFactory().
-										CreateChannel("GreedChannel",50 * RATE_GRANULARITY * 5);
+	Channel* channel = ChannelFactory().CreateChannel("GreedChannel",50 * RATE_GRANULARITY * 5);
 
 	if (channel == 0)
 	{
@@ -46,7 +45,7 @@ int main(int argv,char** args){
 		Client *cl;
 		if (D == 2)
 		{
-			cl = new Client(50*5000000,"10.0.0.1","Gold","720p");
+			cl = new Client(50*5000000,"10.0.0.1","Gold","480p");
 		}
 		else{	
 			cl = new Client(50*5000000,address,"Bronze","1080p");
@@ -55,7 +54,7 @@ int main(int argv,char** args){
 		
 
 	}
-	Simulator sim = Simulator(Clients, *channel,0.01,file,"First");
+	Simulator sim = Simulator(Clients, *channel,0.01,file,"First",500000);
 	sim.setClients(client, "First");
 	
 	sim.Run(FinishTime);

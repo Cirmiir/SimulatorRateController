@@ -25,7 +25,7 @@ class Simulator
 {
 public:
 
-	Simulator(uint32_t client, Channel &chan,double step,std::string file,const char* frequencyController);
+	Simulator(uint32_t client, Channel &chan,double step,std::string file,const char* frequencyController, uint64_t RB);
 	~Simulator();
 	uint64_t MapSum();
 	void Step();

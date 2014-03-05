@@ -32,6 +32,7 @@ void Client::printInfo()
 	std::cout << "Bitrate for client "<<this->getAddress()<<"  "
 				<< this->getNameTarif()<<"  "
 				<< this->getNameQuality()<<" "
-				<< this->getBitrate()/RATE_GRANULARITY <<"Kb " << "\n";;
+				<< this->getBitrate()/RATE_GRANULARITY <<"Kb ResourceBlock: "
+				<< this->getRb() <<" RB " << "\n";
 	return;
 }

@@ -14,7 +14,7 @@ uint64_t Simulator::MapSum(){
 
 	return sum;
 }
-Simulator::Simulator(uint32_t client, Channel &chan,double step,std::string file,const char* frequencyController)
+Simulator::Simulator(uint32_t client, Channel &chan,double step,std::string file,const char* frequencyController, uint64_t RB)
 :m_channel(chan)
 {
 	stepTime = step;
@@ -25,6 +25,7 @@ Simulator::Simulator(uint32_t client, Channel &chan,double step,std::string file
     srand(time(NULL));
 	m_prevTime = 0;
 	m_frequency = FrequencyControllerFactory().createController(frequencyController);
+	m_frequency->setMaxFrequency(RB);
 	m_rate = 0;
 	m_clients = 0;
 }
@@ -74,22 +75,10 @@ void Simulator::Step(){
 		}
 	}
 
-	std::map<ns3::Ipv4Address, uint64_t> mapFrequency; 
-	/*
-	m_channel.transmits(0.1, 0);
-	m_time += 0.01;*/
+	std::map<ns3::Ipv4Address, uint64_t> *mapFrequency = new std::map<ns3::Ipv4Address, uint64_t>;
 	int64_t drop = m_channel.transmits(m_time,0);
-	/*if (drop!=0)
-		while(MapSum() > m_channel.getEnbodedSpeed())
-			for (std::map<ns3::Ipv4Address, Client>::iterator it=m_clients->begin(); it!=m_clients->end(); ++it)
-			{
-				uint64_t cur_Bitrate = it->second.getBitrate();
-				if (cur_Bitrate > drop)
-				{
-					it->second.setBitrate(drop);
-					std::cout<< drop/RATE_GRANULARITY <<"\n";
-				}				
-			}*/
+	if (m_time == 0.49)
+		;
 
 	std::map<ns3::Ipv4Address, uint64_t>* map = m_channel.getSpeeds();
 	if (m_time - m_prevTime > stepTime)
@@ -101,23 +90,18 @@ void Simulator::Step(){
     	}
     	m_prevTime = m_time;
 	}
-	for (std::map<ns3::Ipv4Address, uint64_t>::iterator it=map->begin(); it!=map->end(); ++it)
-			mapFrequency.insert(std::pair<ns3::Ipv4Address, uint64_t>(it->first,it->second/m_clients->find(it->first)-> second.getCondition()));
-
 	
 	std::cout << "In time " << m_time<<"s  ================\n";
-	for (ClientList::iterator it=m_clients->begin(); it!=m_clients->end(); ++it)
-			it->second.printInfo();
-
 	for (std::map<ns3::Ipv4Address, uint64_t>::iterator it=map->begin(); it!=map->end(); ++it)
-				mapFrequency.insert(std::pair<ns3::Ipv4Address, uint64_t>(it->first,it->second/m_clients->find(it->first)-> second.getCondition()));
+					mapFrequency->insert(std::pair<ns3::Ipv4Address, uint64_t>(it->first,it->second/m_clients->find(it->first)-> second.getCondition()));
 
-	//m_frequency->doLoadBalancing(mapFrequency);
-	uint64_t freq;
-	//for (std::map<ns3::Ipv4Address, uint64_t>::iterator it=mapFrequency.begin(); it!=mapFrequency.end(); ++it)
-	//	freq = it->second;
+	m_frequency->doLoadBalancing(*mapFrequency);
+	for (ClientList::iterator it=m_clients->begin(); it!=m_clients->end(); ++it)
+	{
+		it->second.setRb(mapFrequency->find(it->first)->second);
+		it->second.printInfo();
+	}
 
-	*m_files <<m_time<<"  "<<freq<<" "<<trans<<"\n";
 	drop = m_channel.EndTransmit();
 	uint64_t sum=0;
 	*m_files <<m_time<<"  ";
